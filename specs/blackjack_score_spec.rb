@@ -3,7 +3,7 @@ require 'minitest/spec'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/pride'
-
+require 'pry'
 require_relative '../lib/blackjack_score'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
@@ -77,6 +77,17 @@ describe 'Blackjac Score' do
         # Assert
         expect {
           score = blackjack_score(hand) # this method call generates error
+        }.must_raise ArgumentError
+  end
+
+  it 'raises an ArgumentError if you have less than 2 cards' do
+        # Arrange
+        hand = [1]
+
+        # Assert
+        expect {
+          score = blackjack_score(hand) # this method call generates error
+          binding.pry
         }.must_raise ArgumentError
   end
 end
